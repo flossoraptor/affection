@@ -1,6 +1,6 @@
 var setupOptions = {
-    width: 480,
-    height: 800,
+    width: 240,
+    height: 400,
 };
 
 var Q = Quintus()
