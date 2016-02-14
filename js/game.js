@@ -12,7 +12,7 @@ var Q = Quintus()
 Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
-            asset: "bg.png"
+            asset: "bg.png",
             x: 0,
             y: 0
         });
