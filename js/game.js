@@ -9,7 +9,7 @@ var Q = Quintus()
         .setup(setupOptions)
         .controls().touch();
 
-Q.Sprite.extend("Background" {
+Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
             asset: "bg.png"
