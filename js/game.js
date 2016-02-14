@@ -1,7 +1,7 @@
 var setupOptions = {
     width: 240,
     height: 400,
-    downsampleWidth: 480
+    downsampleWidth: 480,
     downsampleHeight: 800
 };
 
