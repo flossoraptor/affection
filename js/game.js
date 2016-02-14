@@ -11,6 +11,8 @@ Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
             asset: "bg.png"
+            w: 240,
+            h: 400
         });
     }
 });
