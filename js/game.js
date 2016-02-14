@@ -1,8 +1,7 @@
 var setupOptions = {
     width: 240,
     height: 400,
-    downsampleWidth: 480,
-    downsampleHeight: 800
+    scaleToFit: true
 };
 
 var Q = Quintus()
