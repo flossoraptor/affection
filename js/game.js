@@ -23,6 +23,6 @@ Q.scene("level1",function(stage) {
     var bg = stage.insert(new Q.Background());
 });
 
-Q.load("bg.png, obstalce.png, player.png", function() {
+Q.load("bg.png, obstacle.png, player.png", function() {
     Q.stageScene("level1");
 });
