@@ -1,6 +1,12 @@
+var setupOptions = {
+    width: 240,
+    height: 400,
+    scaleToFit: true
+};
+
 var Q = Quintus()
         .include("Sprites, Scenes, Input, Touch")
-        .setup({ maximize: true })
+        .setup(setupOptions)
         .controls().touch();
 
 Q.Sprite.extend("Background" {
@@ -11,7 +17,7 @@ Q.Sprite.extend("Background" {
             y: 0
         });
     }
-})
+});
 
 Q.scene("level1",function(stage) {
     var bg = stage.insert(new Q.Background());
