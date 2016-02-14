@@ -5,16 +5,13 @@ var setupOptions = {
 };
 
 var Q = Quintus()
-        .include("Sprites, Scenes, Input, Touch")
-        .setup(setupOptions)
-        .controls().touch();
+        .include("Sprites, Scenes")
+        .setup(setupOptions);
 
 Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
-            asset: "bg.png",
-            x: 0,
-            y: 0
+            asset: "bg.png"
         });
     }
 });
