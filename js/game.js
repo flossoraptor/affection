@@ -32,7 +32,7 @@ Q.MovingSprite.extend("Player", {
             w: 16,
             h: 16,
             asset: 'player.png',
-            vx: 1
+            vx: 100
         });
     }
 })
