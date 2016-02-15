@@ -37,7 +37,8 @@ Q.Sprite.extend("Battlebox", {
 });
 
 Q.scene("level1",function(stage) {
-    var bg = stage.insert(new Q.Background());
+    //var bg = stage.insert(new Q.Background());
+    var battlebox = stage.insert(new Q.Battlebox());
 });
 
 Q.load("battlebox.png, obstacle.png, player.png", function() {
