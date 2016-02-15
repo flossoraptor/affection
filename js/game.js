@@ -11,11 +11,15 @@ var Q = Quintus()
 Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
-            asset: "bg.png",
             w: 240,
             h: 400
         });
-    }
+    },
+
+    draw: function(ctx) {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
+    };
 });
 
 Q.scene("level1",function(stage) {
