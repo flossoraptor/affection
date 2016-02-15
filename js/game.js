@@ -40,7 +40,8 @@ Q.Battlebox.extend("TopBattlebox", {
             x: 120,
             y: 100,
             w: 240,
-            h: 200
+            h: 200,
+            asset: 'battlebox.png'
         });
     }
 });
