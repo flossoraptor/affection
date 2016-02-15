@@ -55,7 +55,7 @@ Q.Battlebox.extend("BottomBattlebox", {
 Q.scene("level1",function(stage) {
     //var bg = stage.insert(new Q.Background());
     var topbattlebox = stage.insert(new Q.TopBattlebox());
-    var bottombattlebox = stage.insert(new Q.BottomBattlebox());
+    //var bottombattlebox = stage.insert(new Q.BottomBattlebox());
 });
 
 Q.load("battlebox.png, obstacle.png, player.png", function() {
