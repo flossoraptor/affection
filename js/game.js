@@ -24,10 +24,22 @@ Q.Sprite.extend("Background", {
     }
 });
 
+Q.Sprite.extend("Battlebox", {
+    init: function(p) {
+        this._super(p, {
+            x: 120,
+            y: 100,
+            w: 240,
+            h: 200,
+            asset: 'battlebox.png'
+        });
+    }
+});
+
 Q.scene("level1",function(stage) {
     var bg = stage.insert(new Q.Background());
 });
 
-Q.load("bg.png, obstacle.png, player.png", function() {
+Q.load("battlebox.png, obstacle.png, player.png", function() {
     Q.stageScene("level1");
 });
