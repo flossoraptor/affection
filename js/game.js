@@ -24,7 +24,7 @@ Q.Sprite.extend("Battleboxes", {
     }
 });
 
-Q.Sprite.extend("Player", {
+Q.MovingSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
             x: 120,
