@@ -39,6 +39,8 @@ Q.Battlebox.extend("TopBattlebox", {
         this._super(p, {
             x: 120,
             y: 100,
+            w: 240,
+            h: 200
         });
     }
 });
@@ -48,6 +50,8 @@ Q.Battlebox.extend("BottomBattlebox", {
         this._super(p, {
             x: 120,
             y: 300,
+            w: 240,
+            h: 200
         });
     }
 });
