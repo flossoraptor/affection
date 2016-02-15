@@ -1,28 +1,16 @@
+var quintusOptions = {
+    development: true
+}
+
 var setupOptions = {
     width: 240,
     height: 400,
     scaleToFit: true
 };
 
-var Q = Quintus()
+var Q = Quintus(quintusOptions)
         .include("Sprites, Scenes")
         .setup(setupOptions);
-
-Q.Sprite.extend("Background", {
-    init: function(p) {
-        this._super(p, {
-            x: 120,
-            y: 200,
-            w: 240,
-            h: 400
-        });
-    },
-
-    draw: function(ctx) {
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
-    }
-});
 
 Q.Sprite.extend("Battleboxes", {
     init: function(p) {
@@ -36,8 +24,21 @@ Q.Sprite.extend("Battleboxes", {
     }
 });
 
+Q.Sprite.extend("Player", {
+    init: function(p) {
+        this._super(p, {
+            x: 120,
+            y: 300,
+            w: 16,
+            h: 16,
+            asset: 'player.png'
+        });
+    }
+})
+
 Q.scene("level1",function(stage) {
     var battleboxes = stage.insert(new Q.Battleboxes());
+    var player = stage.insert(new Q.Player());
 });
 
 Q.load("battlebox.png, battleboxes.png, obstacle.png, player.png", function() {
