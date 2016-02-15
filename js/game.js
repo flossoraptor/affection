@@ -27,8 +27,6 @@ Q.Sprite.extend("Background", {
 Q.Sprite.extend("Battlebox", {
     init: function(p) {
         this._super(p, {
-            x: 120,
-            y: 100,
             w: 240,
             h: 200,
             asset: 'battlebox.png'
@@ -36,9 +34,28 @@ Q.Sprite.extend("Battlebox", {
     }
 });
 
+Q.Battlebox.extend("TopBattlebox", {
+    init: function(p) {
+        this._super(p, {
+            x: 120,
+            y: 100,
+        });
+    }
+});
+
+Q.Battlebox.extend("BottomBattlebox", {
+    init: function(p) {
+        this._super(p, {
+            x: 120,
+            y: 300,
+        });
+    }
+});
+
 Q.scene("level1",function(stage) {
     //var bg = stage.insert(new Q.Background());
-    var battlebox = stage.insert(new Q.Battlebox());
+    var topbattlebox = stage.insert(new Q.TopBattlebox());
+    var bottombattlebox = stage.insert(new Q.BottomBattlebox());
 });
 
 Q.load("battlebox.png, obstacle.png, player.png", function() {
