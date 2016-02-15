@@ -24,22 +24,22 @@ Q.Sprite.extend("Background", {
     }
 });
 
-Q.Sprite.extend("Battlebox", {
+Q.Sprite.extend("Battleboxes", {
     init: function(p) {
         this._super(p, {
             x: 120,
-            y: 100,
+            y: 200,
             w: 240,
             h: 200,
-            asset: 'battlebox.png'
+            asset: 'battleboxes.png'
         });
     }
 });
 
 Q.scene("level1",function(stage) {
-    var battlebox = stage.insert(new Q.Battlebox());
+    var battleboxes = stage.insert(new Q.Battleboxes());
 });
 
-Q.load("battlebox.png, obstacle.png, player.png", function() {
+Q.load("battlebox.png, battleboxes.png, obstacle.png, player.png", function() {
     Q.stageScene("level1");
 });
