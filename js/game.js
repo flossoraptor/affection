@@ -30,7 +30,7 @@ Q.Sprite.extend("Battleboxes", {
             x: 120,
             y: 200,
             w: 240,
-            h: 200,
+            h: 400,
             asset: 'battleboxes.png'
         });
     }
