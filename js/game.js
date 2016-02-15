@@ -31,7 +31,8 @@ Q.Sprite.extend("Player", {
             y: 300,
             w: 16,
             h: 16,
-            asset: 'player.png'
+            asset: 'player.png',
+            vx: 1
         });
     }
 })
