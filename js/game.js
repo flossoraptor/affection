@@ -11,6 +11,8 @@ var Q = Quintus()
 Q.Sprite.extend("Background", {
     init: function(p) {
         this._super(p, {
+            x: 120,
+            y: 200,
             w: 240,
             h: 400
         });
