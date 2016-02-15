@@ -19,7 +19,7 @@ Q.Sprite.extend("Background", {
     },
 
     draw: function(ctx) {
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = '#000000';
         ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
     }
 });
