@@ -27,11 +27,12 @@ Q.Sprite.extend("Battleboxes", {
 Q.MovingSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
+            vx: 10,
             x: 120,
             y: 300,
             w: 16,
             h: 16,
-            asset: 'player.png',
+            asset: 'player.png'
         });
     }
 })
@@ -39,7 +40,6 @@ Q.MovingSprite.extend("Player", {
 Q.scene("level1",function(stage) {
     var battleboxes = stage.insert(new Q.Battleboxes());
     var player = stage.insert(new Q.Player());
-    player.vx = 1;
 });
 
 Q.load("battlebox.png, battleboxes.png, obstacle.png, player.png", function() {
