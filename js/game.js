@@ -57,8 +57,8 @@ Q.Sprite.extend("BBSprite", {
     Draws the sprite both to the bottom and top battle box
     */
     draw: function(ctx) {
-        //this._draw(ctx, 0);
-        this._draw(ctx, -50);
+        this._draw(ctx, 0);
+        this._draw(ctx, 200);
     }
 })
 
