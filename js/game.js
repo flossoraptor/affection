@@ -24,7 +24,47 @@ Q.Sprite.extend("Battleboxes", {
     }
 });
 
-Q.Sprite.extend("Player", {
+Q.Sprite.extend("BBSprite", {
+    init: function(props, defaultProps) {
+        this.super(Q.extend({
+
+        }, props), defaultProps);
+    },
+
+    /**
+    The Q.Sprite implementation of draw, with a vertical offset.
+    */
+    _draw: function(ctx, dy) {
+      var p = this.p;
+      var drawP = {
+          cx: p.cx,
+          cy: p.cy + dy,
+          frame: p.frame,
+          asset: p.asset,
+          color: p.color,
+          w: p.w,
+          h: p.h
+      };
+      if(drawP.sheet) {
+        this.sheet().draw(ctx,-drawP.cx,-drawP.cy,drawP.frame);
+      } else if(drawP.asset) {
+        ctx.drawImage(Q.asset(drawP.asset),-drawP.cx,-drawP.cy);
+      } else if(drawP.color) {
+        ctx.fillStyle = drawP.color;
+        ctx.fillRect(-drawP.cx,-drawP.cy,drawP.w,drawP.h);
+      }
+    },
+
+    /**
+    Draws the sprite both to the bottom and top battle box
+    */
+    draw: function(ctx) {
+        _draw(ctx, 0);
+        _draw(ctx, -200);
+    }
+})
+
+Q.BBSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
             x: 120,
