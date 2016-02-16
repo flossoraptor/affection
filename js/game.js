@@ -26,9 +26,7 @@ Q.Sprite.extend("Battleboxes", {
 
 Q.Sprite.extend("BBSprite", {
     init: function(props, defaultProps) {
-        this.super(Q.extend({
-
-        }, props), defaultProps);
+        this.super(props, defaultProps);
     },
 
     /**
