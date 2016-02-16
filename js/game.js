@@ -37,8 +37,8 @@ Q.Sprite.extend("Player", {
     },
 
     step: function(dt) {
-        console.log('asdf!');
         this.x = this.x + this.vx * dt;
+        console.log('here\'s my x coord: ' + this.x);
     }
 })
 
