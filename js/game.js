@@ -37,8 +37,7 @@ Q.Sprite.extend("Player", {
     },
 
     step: function(dt) {
-        var p = this.p;
-        p.x = p.x + p.vx * dt;
+        this.p.x += this.p.vx * dt;
     }
 })
 
