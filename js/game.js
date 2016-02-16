@@ -24,16 +24,20 @@ Q.Sprite.extend("Battleboxes", {
     }
 });
 
-Q.MovingSprite.extend("Player", {
+Q.Sprite.extend("Player", {
     init: function(p) {
         this._super(p, {
-            vx: 10,
             x: 120,
             y: 300,
             w: 16,
             h: 16,
-            asset: 'player.png'
+            asset: 'player.png',
+            vx: 1
         });
+    },
+
+    step: function(dt) {
+        this.x = this.x + this.vx * dt;
     }
 })
 
