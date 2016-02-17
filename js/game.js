@@ -18,8 +18,7 @@ Q.Sprite.extend("Battlebox", {
             y: 120,
             w: 427,
             h: 240,
-            asset: 'bg.png',
-            vx: 5
+            asset: 'bg.png'
         });
     }
 });
@@ -32,6 +31,7 @@ Q.MovingSprite.extend("Player", {
             w: 16,
             h: 16,
             asset: 'player.png',
+            vx: 5
         });
     },
 
