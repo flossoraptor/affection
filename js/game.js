@@ -18,7 +18,8 @@ Q.Sprite.extend("Battlebox", {
             y: 120,
             w: 427,
             h: 240,
-            asset: 'bg.png'
+            asset: 'bg.png',
+            vx: 5
         });
     }
 });
