@@ -5,16 +5,15 @@ var quintusOptions = {
 var setupOptions = {
     width: 427,
     height: 240,
-//    downsampleWidth: 854,
-//    downsampleHeight: 480
     scaleToFit: true
 };
 
 // setupOptions={maximize:true};
 
 var Q = Quintus(quintusOptions)
-        .include("Sprites, Scenes")
-        .setup(setupOptions);
+        .include("Sprites, Scenes, Input, Touch, UI")
+        .setup(setupOptions)
+        .touch();
 
 Q.Sprite.extend("Battlebox", {
     init: function(p) {
@@ -47,22 +46,30 @@ Q.MovingSprite.extend("Player", {
     */
 });
 
-Q.Sprite.extend("Catty", {
+Q.Sprite.extend("TouchRegistrant", {
     init: function(p) {
         this._super(p, {
-            x: 100,
-            y: 100,
-            w: 105,
-            h: 92,
-            asset: 'cattytest.png'
+            x: 213,
+            y: 120,
+            w: 427,
+            h: 240,
+            asset: 'player.png'
         });
+        this.p.collisionMask = 32;
+        this.on("drag");
+    },
+
+    drag: function(touch) {
+        console.log('aww yiss');
+        this.p.x = touch.origX + touch.dx;
+        this.p.y = touch.origY + touch.dy;
     }
 });
 
 Q.scene("level1",function(stage) {
     var battlebox = stage.insert(new Q.Battlebox());
     var player = stage.insert(new Q.Player({ vx : 10 }));
-    var cattytest = stage.insert(new Q.Catty());
+    var touch = stage.insert(new Q.TouchRegistrant());
 });
 
 Q.load("bg.png, obstacle.png, player.png, cattytest.png", function() {
