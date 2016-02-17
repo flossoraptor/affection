@@ -5,9 +5,12 @@ var quintusOptions = {
 var setupOptions = {
     width: 427,
     height: 240,
+//    downsampleWidth: 854,
+//    downsampleHeight: 480
+    scaleToFit: true
 };
 
-setupOptions={maximize:true};
+// setupOptions={maximize:true};
 
 var Q = Quintus(quintusOptions)
         .include("Sprites, Scenes")
