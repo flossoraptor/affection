@@ -31,8 +31,12 @@ Q.MovingSprite.extend("Player", {
             w: 16,
             h: 16,
             asset: 'player.png',
-            vx: 5
         });
+    },
+
+    step: function(dt) {
+        var p = this.p;
+        p.x += p.vx * dt;
     }
 })
 
