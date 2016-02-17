@@ -9,7 +9,7 @@ var setupOptions = {
 
 var Q = Quintus(quintusOptions)
         .include("Sprites, Scenes")
-        .setup({ maximize: true });
+        .setup(setupOptions);
 
 Q.Sprite.extend("Battlebox", {
     init: function(p) {
