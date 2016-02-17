@@ -72,6 +72,6 @@ Q.scene("level1",function(stage) {
     var touch = stage.insert(new Q.TouchRegistrant());
 });
 
-Q.load("bg.png, obstacle.png, player.png, cattytest.png", function() {
+Q.load("bg.png, obstacle.png, player.png", function() {
     Q.stageScene("level1");
 });
