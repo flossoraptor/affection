@@ -7,6 +7,8 @@ var setupOptions = {
     height: 240,
 };
 
+setupOptions={maximize:true};
+
 var Q = Quintus(quintusOptions)
         .include("Sprites, Scenes")
         .setup(setupOptions);
@@ -32,12 +34,14 @@ Q.MovingSprite.extend("Player", {
             h: 16,
             asset: 'player.png'
         });
-    },
+    }
 
+/*
     step: function(dt) {
         var p = this.p;
         p.x += p.vx * dt;
     }
+    */
 })
 
 Q.scene("level1",function(stage) {
