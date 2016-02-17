@@ -26,8 +26,8 @@ Q.Sprite.extend("Battlebox", {
 Q.MovingSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
-            x: 120,
-            y: 300,
+            x: 213,
+            y: 120,
             w: 16,
             h: 16,
             asset: 'player.png',
