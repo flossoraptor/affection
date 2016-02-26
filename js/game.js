@@ -3,24 +3,24 @@ var quintusOptions = {
 };
 
 var Q = Quintus(quintusOptions)
-        .include("Sprites, Scenes, Input, Touch");
+        .include("Sprites, Scenes, Input, Touch, Pixels");
 
 var setupOptions = {
-    width: 427,
+    width: 400,
     height: 240,
     scaleToFit: true
 };
 
-Q.setup(setupOptions)
+Q.pixelsSetup(setupOptions)
  .touch(Q.SPRITE_ALL);
 
 Q.Sprite.extend("Battlebox", {
     init: function(p) {
         this._super(p, {
-            x: 213,
+            x: 200,
             y: 120,
-            w: 427,
-            h: 240,
+            w: 256,
+            h: 224,
             asset: 'bg.png'
         });
     }
@@ -29,10 +29,10 @@ Q.Sprite.extend("Battlebox", {
 Q.Sprite.extend("Player", {
     init: function(p) {
         this._super(p, {
-            x: 213,
-            y: 120,
-            w: 16,
-            h: 16,
+            x: 50,
+            y: 50,
+            w: 100,
+            h: 100,
             asset: 'player.png'
         });
         //this.p.collisionMask = 32;
@@ -41,7 +41,7 @@ Q.Sprite.extend("Player", {
     },
 
     drag: function(touch) {
-        console.log('aww yiss');
+        console.log('drag coords: ' + touch.origX + ', ' + touch.origY);
         this.p.x = touch.origX + touch.dx;
         this.p.y = touch.origY + touch.dy;
     },
