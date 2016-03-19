@@ -11,19 +11,39 @@ var setupOptions = {
     scaleToFit: true
 };
 
-Q.pixelsSetup(setupOptions);
+Q.pixelsSetup(setupOptions).controls();
 
-Q.PixelsSprite.extend("Player", {
+Q.MovingSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
-            x: 400,
-            y: 240,
+            x: 50,
+            y: 50,
             w: 16,
             h: 16,
             asset: 'player.png'
         });
-        this.add('topdownControls');
+        this.p.speed = 100;
     },
+
+    step: function(dt) {
+        var p = this.p;
+
+        p.vx = 0;
+        if(Q.inputs['left']) {
+            p.vx -= p.speed;
+        }
+        if (Q.inputs['right']) {
+            p.vx += p.speed;
+        }
+        p.vy = 0;
+        if(Q.inputs['up']) {
+            p.vy -= p.speed;
+        }
+        if (Q.inputs['down']) {
+            p.vy += p.speed;
+        }
+        this._super(dt);
+    }
 });
 
 Q.scene("level1",function(stage) {
