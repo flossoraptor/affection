@@ -3,7 +3,7 @@ var quintusOptions = {
 };
 
 var Q = Quintus(quintusOptions)
-        .include("Sprites, Scenes, Input, Touch, Pixels");
+        .include("Sprites, Scenes, Input, Pixels");
 
 var setupOptions = {
     width: 400,
@@ -11,44 +11,19 @@ var setupOptions = {
     scaleToFit: true
 };
 
-Q.pixelsSetup(setupOptions)
- .touch(Q.SPRITE_ALL);
+Q.pixelsSetup(setupOptions);
 
-Q.Sprite.extend("Battlebox", {
+Q.PixelsSprite.extend("Player", {
     init: function(p) {
         this._super(p, {
-            x: 200,
-            y: 120,
-            w: 256,
-            h: 224,
-            asset: 'bg.png'
-        });
-    }
-});
-
-Q.Sprite.extend("Player", {
-    init: function(p) {
-        this._super(p, {
-            x: 50,
-            y: 50,
-            w: 100,
-            h: 100,
+            x: 400,
+            y: 240,
+            w: 16,
+            h: 16,
             asset: 'player.png'
         });
-        //this.p.collisionMask = 32;
-        this.on("drag");
-        this.on("touchEnd");
+        this.add('topdownControls');
     },
-
-    drag: function(touch) {
-        //console.log('drag coords: ' + touch.origX + ', ' + touch.origY);
-        this.p.x = touch.origX + touch.dx;
-        this.p.y = touch.origY + touch.dy;
-    },
-
-    touchEnd: function(touch) {
-        //console.log('that\'s over');
-    }
 });
 
 Q.scene("level1",function(stage) {
