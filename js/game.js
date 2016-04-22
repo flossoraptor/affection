@@ -26,7 +26,7 @@ Q.MovingSprite.extend("Player", {
         this.p.invincibility = {timer:0};
         this.p.flicker = {count:0};
         this.p.speed = 100;
-        this.p.hp = 20;
+        this.p.hp = 10;
         if (p) {
             this.p.hpText = p.hpText;
             this.p.hpText.p.label = '' + this.p.hp;
@@ -44,28 +44,39 @@ Q.MovingSprite.extend("Player", {
     },
 
     step: function(dt) {
-        var p = this.p;
+        this.step_check(dt);
 
-        p.vx = 0;
-        if(Q.inputs['left']) {
-            p.vx -= p.speed;
-        }
-        if (Q.inputs['right']) {
-            p.vx += p.speed;
-        }
-        p.vy = 0;
-        if(Q.inputs['up']) {
-            p.vy -= p.speed;
-        }
-        if (Q.inputs['down']) {
-            p.vy += p.speed;
-        }
+        this.step_controls(dt);
 
         this.step_invincibility(dt);
 
         this.stage.collide(this);
 
         this._super(dt);
+    },
+
+    step_check: function(dt) {
+        if (this.p.hp <= 0) {
+            this.triggerGameOver();
+        }
+    },
+
+    step_controls: function(dt) {
+        var p = this.p;
+        p.vx = 0;
+        if(Q.inputs['left']) {
+            p.vx = -1 * p.speed;
+        }
+        if (Q.inputs['right']) {
+            p.vx = p.speed;
+        }
+        p.vy = 0;
+        if(Q.inputs['up']) {
+            p.vy = -1 * p.speed;
+        }
+        if (Q.inputs['down']) {
+            p.vy = p.speed;
+        }
     },
 
     step_invincibility: function(dt) {
@@ -89,6 +100,10 @@ Q.MovingSprite.extend("Player", {
         } else {
             p.flicker.count = p.flicker.count - 1;
         }
+    },
+
+    triggerGameOver: function() {
+        Q.stageScene("gameOver");
     },
 
     toggle_opacity: function() {
@@ -171,28 +186,45 @@ Q.MovingSprite.extend("BulletShooter", {
     }
 })
 
-Q.scene("level1",function(stage) {
-    var container = stage.insert(new Q.UI.Container({
+Q.scene("underAttack",function(stage) {
+    var hpTextContainer = stage.insert(new Q.UI.Container({
         fill: "black",
-        border: 5,
-        shadow: 10,
+        border: 0,
+        shadow: 0,
         shadowColor: "rgba(0,0,0,0.5)",
         x: 35,
         y: 0
     }));
     var hpText = new Q.UI.Text({
-        label: "40",
+        label: "0",
         color: "white",
         x: 0,
         y: 0
     });
-    stage.insert(hpText, container);
+    stage.insert(hpText, hpTextContainer);
     var player = stage.insert(new Q.Player({hpText:hpText}));
     stage.insert(new Q.BulletShooter({x:75, y:75, vx:30}, stage));
     stage.insert(new Q.BulletShooter({x:150, y:125, vx: 30, vy: 15}, stage));
     stage.insert(new Q.BulletShooter({x:225, y:175, vx: 15, vy: -30}, stage));
 });
 
+Q.scene("gameOver", function(stage) {
+    var gameOverTextContainer = stage.insert(new Q.UI.Container({
+        fill: "black",
+        border: 3,
+        borderColor: "rgba(255,255,255,255)",
+        x: 35,
+        y: 0
+    }));
+    var gameOverText = new Q.UI.Text({
+        label: "Game Over",
+        color: "white",
+        x: 125,
+        y: 125
+    });
+    stage.insert(gameOverText, gameOverTextContainer);
+});
+
 Q.load("bg.png, obstacle.png, player.png, bullet.png", function() {
-    Q.stageScene("level1");
+    Q.stageScene("underAttack");
 });
