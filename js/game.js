@@ -26,8 +26,8 @@ Q.MovingSprite.extend("Player", {
         this.p.invincibility = {timer:0};
         this.p.flicker = {count:0};
         this.p.speed = 100;
-        this.p.hp = 10;
         if (p) {
+            this.p.hp = p.hp;
             this.p.hpText = p.hpText;
             this.p.hpText.p.label = '' + this.p.hp;
         }
@@ -125,6 +125,7 @@ Q.MovingSprite.extend("Player", {
 
     updateHp: function(hp) {
         this.p.hpText.p.label = '' + hp;
+        this.stage.options.underAttackState.player.hp = hp;
     }
 });
 
@@ -230,7 +231,7 @@ Q.Sprite.extend("Cursor", {
 
         if (Q.inputs['period']) {
             if (p.selection == 0) {
-                Q.stageScene("underAttack");
+                Q.stageScene("underAttack", 0, {underAttackState:this.stage.options.menuState});
             }
         }
     },
@@ -243,6 +244,29 @@ Q.Sprite.extend("Cursor", {
             p.x = 170;
         } else if (p.selection == 2) {
             p.x = 305;
+        }
+    }
+});
+
+/*
+ * Object that tracks the duration of the current enemy's attack
+ * in the 'under attack' phase. Controls when it is time to move
+ * back to the battle menu.
+ * This class is a subclass of Sprite because it needs to know how much
+ * time has passed in the stage. Maybe there is a better class that it should
+ * extend?
+ */
+Q.Sprite.extend("UnderAttackPhase", {
+    init: function(duration) {
+        this._super({}, {});
+        this.p.duration = duration;
+        this.p.timer = 0;
+    },
+
+    step: function(dt) {
+        this.p.timer += dt;
+        if (this.p.timer >= this.p.duration) {
+            Q.stageScene("battleMenu", 0, {menuState:this.stage.options.underAttackState});
         }
     }
 });
@@ -297,6 +321,8 @@ Q.scene("battleMenu",function(stage) {
 });
 
 Q.scene("underAttack",function(stage) {
+    var underAttackState = stage.options.underAttackState;
+
     var hpTextContainer = stage.insert(new Q.UI.Container({
         fill: "black",
         border: 0,
@@ -312,10 +338,17 @@ Q.scene("underAttack",function(stage) {
         y: 0
     });
     stage.insert(hpText, hpTextContainer);
-    var player = stage.insert(new Q.Player({hpText:hpText}));
+    var player = stage.insert(new Q.Player(
+        {
+            hp:underAttackState.player.hp,
+            hpText:hpText
+        })
+    );
     stage.insert(new Q.BulletShooter({x:75, y:75, vx:30}, stage));
     stage.insert(new Q.BulletShooter({x:150, y:125, vx: 30, vy: 15}, stage));
     stage.insert(new Q.BulletShooter({x:225, y:175, vx: 15, vy: -30}, stage));
+
+    stage.insert(new Q.UnderAttackPhase(underAttackState.enemy.duration, stage));
 });
 
 Q.scene("gameOver", function(stage) {
@@ -336,5 +369,12 @@ Q.scene("gameOver", function(stage) {
 });
 
 Q.load("bg.png, obstacle.png, player.png, bullet.png", function() {
-    Q.stageScene("battleMenu");
+    Q.stageScene("battleMenu", 0,
+        {
+            menuState: {
+                player: {hp: 10},
+                enemy: {hp: 10, duration: 6}
+            }
+        }
+    );
 });
