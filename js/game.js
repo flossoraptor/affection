@@ -27,9 +27,8 @@ Q.MovingSprite.extend("Player", {
         this.p.flicker = {count:0};
         this.p.speed = 100;
         if (p) {
-            this.p.hp = p.hp;
             this.p.hpText = p.hpText;
-            this.p.hpText.p.label = '' + this.p.hp;
+            this.updateHp(p.hp);
         }
 
         this.on("hit.sprite",function(collision) {
@@ -125,7 +124,11 @@ Q.MovingSprite.extend("Player", {
 
     updateHp: function(hp) {
         this.p.hpText.p.label = '' + hp;
-        this.stage.options.underAttackState.player.hp = hp;
+        this.p.hp = hp;
+    },
+
+    getPlayerState: function() {
+        return { hp : this.p.hp };
     }
 });
 
@@ -257,17 +260,24 @@ Q.Sprite.extend("Cursor", {
  * extend?
  */
 Q.Sprite.extend("UnderAttackPhase", {
-    init: function(duration) {
+    init: function(duration, player) {
         this._super({}, {});
         this.p.duration = duration;
         this.p.timer = 0;
+        this.p.player = player;
     },
 
     step: function(dt) {
         this.p.timer += dt;
         if (this.p.timer >= this.p.duration) {
-            Q.stageScene("battleMenu", 0, {menuState:this.stage.options.underAttackState});
+            this.returnToBattleMenu();
         }
+    },
+
+    returnToBattleMenu: function() {
+        var menuState = this.stage.options.underAttackState;
+        menuState.player = this.p.player.getPlayerState();
+        Q.stageScene("battleMenu", 0, {menuState:menuState});
     }
 });
 
@@ -348,7 +358,7 @@ Q.scene("underAttack",function(stage) {
     stage.insert(new Q.BulletShooter({x:150, y:125, vx: 30, vy: 15}, stage));
     stage.insert(new Q.BulletShooter({x:225, y:175, vx: 15, vy: -30}, stage));
 
-    stage.insert(new Q.UnderAttackPhase(underAttackState.enemy.duration, stage));
+    stage.insert(new Q.UnderAttackPhase(underAttackState.enemy.duration, player));
 });
 
 Q.scene("gameOver", function(stage) {
