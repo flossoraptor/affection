@@ -1,20 +1,28 @@
 module.exports = function(grunt) {
 
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
-        src: ['js/**/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    }
-  });
+	var srcNames = ['main', 'menu', 'battle/underattack/bullet',
+		'battle/underattack/player', 'battle/underattack/scene', 'gameover'
+	];
+	var getPath = function(name) {
+		return 'js/' + name + '.js';
+	}
+	var srcFiles = srcNames.map(getPath);
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		concat: {
+			options: {
+				separator: ';'
+			},
+			dist: {
+				src: srcFiles,
+				dest: 'dist/<%= pkg.name %>.js'
+			}
+		}
+	});
 
-  grunt.registerTask('default', ['concat']);
+	grunt.loadNpmTasks('grunt-contrib-concat');
+
+	grunt.registerTask('default', ['concat']);
 
 };
