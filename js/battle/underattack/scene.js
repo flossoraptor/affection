@@ -6,22 +6,14 @@
  * time has passed in the stage. Maybe there is a better class that it should
  * extend?
  */
-Q.Sprite.extend("UnderAttackPhase", {
+Q.TimedPhase.extend("UnderAttackPhase", {
 	init: function(duration, player) {
-		this._super({}, {});
+		this._super();
 		this.p.duration = duration;
-		this.p.timer = 0;
 		this.p.player = player;
 	},
 
-	step: function(dt) {
-		this.p.timer += dt;
-		if (this.p.timer >= this.p.duration) {
-			this.returnToBattleMenu();
-		}
-	},
-
-	returnToBattleMenu: function() {
+	callback: function() {
 		var menuState = this.stage.options.underAttackState;
 		menuState.player = this.p.player.getPlayerState();
 		Q.stageScene("battleMenu", 0, {

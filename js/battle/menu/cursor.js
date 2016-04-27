@@ -42,7 +42,7 @@ Q.Sprite.extend("Cursor", {
 
         if (Q.inputs['period']) {
             if (p.selection == 0) {
-                Q.stageScene("underAttack", 0, {underAttackState:this.stage.options.menuState});
+                this.selectFight();
             }
         }
     },
@@ -56,54 +56,9 @@ Q.Sprite.extend("Cursor", {
         } else if (p.selection == 2) {
             p.x = 305;
         }
-    }
-});
+    },
 
-Q.scene("battleMenu",function(stage) {
-    var fightTextContainer = stage.insert(new Q.UI.Container({
-        fill: "black",
-        border: 0,
-        shadow: 0,
-        shadowColor: "rgba(0,0,0,0.5)",
-        x: 90,
-        y: 230
-    }));
-    var fightText = new Q.UI.Text({
-        label: "FIGHT",
-        color: "white",
-        x: 0,
-        y: 0
-    });
-    stage.insert(fightText, fightTextContainer);
-    var itemTextContainer = stage.insert(new Q.UI.Container({
-        fill: "black",
-        border: 0,
-        shadow: 0,
-        shadowColor: "rgba(0,0,0,0.5)",
-        x: 220,
-        y: 230
-    }));
-    var itemText = new Q.UI.Text({
-        label: "ITEM",
-        color: "white",
-        x: 0,
-        y: 0
-    });
-    stage.insert(itemText, itemTextContainer);
-    var runTextContainer = stage.insert(new Q.UI.Container({
-        fill: "black",
-        border: 0,
-        shadow: 0,
-        shadowColor: "rgba(0,0,0,0.5)",
-        x: 350,
-        y: 230
-    }));
-    var runText = new Q.UI.Text({
-        label: "RUN",
-        color: "white",
-        x: 0,
-        y: 0
-    });
-    stage.insert(runText, runTextContainer);
-    var cursor = stage.insert(new Q.Cursor());
+    selectFight: function() {
+        Q.stageScene("attack", 0, {attackState:this.stage.options.menuState});
+    }
 });
